@@ -2,8 +2,8 @@ pipeline {
     
 	agent any
     tools {
-        "MAVEN3"
-        "OracleJDK8"
+        maven "MAVEN3"
+        jdk "OracleJDK8"
     }
     environment {
         NEXUS_VERSION = "nexus3"
