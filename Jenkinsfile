@@ -11,7 +11,7 @@ pipeline {
         NEXUS_USER = "admin"
         NEXUS_PASS = "admin123"
         SNAP_REPO = "vprofile-snapshot"
-        RELEASE_REPO "vprofile-release"
+        RELEASE_REPO = "vprofile-release"
         CENTRAL_REPO = "vpro-maven-central"
         NEXUS_GRP_REPO = "vpro-maven-group"
         NEXUS_LOGIN = "nexuslogin"
