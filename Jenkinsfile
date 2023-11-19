@@ -14,7 +14,7 @@ pipeline {
         RELEASE_REPO = "vprofile-release"
         CENTRAL_REPO = "vpro-maven-central"
         NEXUS_GRP_REPO = "vpro-maven-group"
-        NEXUS_LOGIN = "nexuslogin"
+        NEXUS_LOGIN = "nexuslogi"
         NEXUSIP = "172.31.11.63"
         NEXUSPORT= "8081"
 
