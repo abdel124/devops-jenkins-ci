@@ -8,7 +8,7 @@
 - Spring MVC
 - Spring Security
 - Spring Data JPA
-- Maven
+- Mavens
 - JSP
 - MySQL
 ### Database
