@@ -14,7 +14,7 @@ pipeline {
         RELEASE_REPO = "vprofile-release"
         CENTRAL_REPO = "vpro-maven-central"
         NEXUS_GRP_REPO = "vpro-maven-group"
-        NEXUS_LOGIN = "nexuslogi"
+        NEXUS_LOGIN = "nexuslogin"
         NEXUSIP = "172.31.11.17"
         NEXUSPORT= "8081"
 
@@ -40,6 +40,26 @@ pipeline {
         stage('Checkstyle Analysis'){
             steps {
                 sh 'mvn checkstyle:checkstyle'
+            }
+
+        }
+        stage('upload artifcat to nexus'){
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: "${NEXUSIP}:${NEXUSPORT}"
+                    groupId: 'QA',
+                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                    repository: "${RELEASE_REPO}",
+                    credentialsId: "${NEXUS_LOGIN}",
+                    artifacts: [
+                        [artifactId: 'vproapp',
+                        classifier: '',
+                        file: 'target/vprofile-v2.war',
+                        type: 'war']
+                    ]
+                )
             }
 
         }
