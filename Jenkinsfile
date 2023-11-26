@@ -64,5 +64,12 @@ pipeline {
 
         }
     }
-
+  post {
+    success {
+      slackSend channel : '#jenkinscicd', color: '#36a64f', message: "Deployment of myapp to production succeeded!"
+    }
+    failure {
+      slackSend channel : '#jenkinscicd', color: '#ff0000', message: "Deployment of myapp to production failed!"
+    }
+  }
 }
