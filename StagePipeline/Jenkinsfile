@@ -83,6 +83,12 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Ecs cluster'){
+            steps {
+                withAWS(credentials : 'awscred' , region: 'us-west-1')
+                sh 'aws ecs update-service --cluser ${cluster} --service ${vproappstagesvc} --force-new-deployment'
+            }
+        }
     }
   post {
     success {
