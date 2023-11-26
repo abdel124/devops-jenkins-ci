@@ -17,6 +17,9 @@ pipeline {
         NEXUS_LOGIN = "nexuslogin"
         NEXUSIP = "172.31.11.17"
         NEXUSPORT= "8081"
+        registeryCredntial = 'ecr:us-west-1:awscred'
+        appRegistry = "349865279621.dkr.ecr.us-west-1.amazonaws.com/vprofileappimg"
+        vprofileRegistry = "https://349865279621.dkr.ecr.us-west-1.amazonaws.com"
 
     }
     stages{
@@ -62,6 +65,23 @@ pipeline {
                 )
             }
 
+        }
+        stage('build app image'){
+            steps {
+                script {
+                    dockerImage = docker.build( appRegistry + ":$BUID_NUMBER" , "./Docker-files/app/multistage/")
+                }
+            }
+        }
+        stage('upload app image'){
+            steps {
+                script {
+                    docker.withRegistry(vprofileRegistry, registeryCredntial){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push("latest")
+                    }
+                }
+            }
         }
     }
   post {
